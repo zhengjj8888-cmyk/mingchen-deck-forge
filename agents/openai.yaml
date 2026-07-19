@@ -1,0 +1,4 @@
+interface:
+  display_name: "明辰 Deck Forge"
+  short_description: "把观点整理成结构清晰、风格统一并可直接演示的 HTML 幻灯片"
+  default_prompt: "使用 $mingchen-deck-forge 把这份内容做成可直接演示的 HTML 幻灯片。"
