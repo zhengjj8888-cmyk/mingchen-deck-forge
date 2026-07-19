@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>一套可直接开始的网页幻灯片</title>
+  <style>
+    :root { --ink: #10213b; --paper: #f5f7fb; --accent: #ff6b3d; --muted: #667085; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #dfe5ef; color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+    .slide { display: none; position: relative; width: min(100vw, 1280px); aspect-ratio: 16 / 9; margin: 0 auto; padding: 8.5% 9%; overflow: hidden; background: var(--paper); }
+    .slide.active { display: grid; align-content: center; gap: 24px; }
+    .eyebrow { margin: 0; color: var(--accent); font-size: clamp(14px, 1.4vw, 20px); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    h1, h2, p { margin: 0; }
+    h1 { max-width: 900px; font-size: clamp(42px, 6vw, 88px); line-height: 1.08; letter-spacing: -.05em; }
+    h2 { max-width: 900px; font-size: clamp(34px, 4.3vw, 64px); line-height: 1.15; letter-spacing: -.04em; }
+    .lead { max-width: 720px; color: var(--muted); font-size: clamp(18px, 2vw, 30px); line-height: 1.6; }
+    .points { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+    .point { padding: 22px; border-radius: 16px; background: #fff; font-size: clamp(16px, 1.5vw, 22px); line-height: 1.5; box-shadow: 0 8px 22px rgba(16, 33, 59, .06); }
+    .number { position: absolute; right: 9%; bottom: 8%; color: var(--muted); font-size: 15px; }
+    .accent-line { width: 74px; height: 10px; border-radius: 99px; background: var(--accent); }
+    @media (max-width: 720px) { .slide { width: 100vw; min-height: 100vh; aspect-ratio: auto; padding: 12% 8%; } .points { grid-template-columns: 1fr; } }
+    @media print { body { background: #fff; } .slide { display: grid !important; width: 100%; break-after: page; page-break-after: always; } }
+  </style>
+</head>
+<body>
+  <section class="slide active">
+    <p class="eyebrow">01 / 开场</p>
+    <div class="accent-line"></div>
+    <h1>把一段内容，变成观众愿意跟下去的叙事</h1>
+    <p class="lead">替换为你的核心判断。首页只负责让人愿意继续看，不负责交代全部背景。</p>
+    <span class="number">01</span>
+  </section>
+
+  <section class="slide">
+    <p class="eyebrow">02 / 解释</p>
+    <h2>一页只推动一个认知动作</h2>
+    <div class="points">
+      <div class="point"><strong>提出</strong><br>先讲此刻真正的问题。</div>
+      <div class="point"><strong>证明</strong><br>再给事实、数据或案例。</div>
+      <div class="point"><strong>行动</strong><br>最后说明下一步是什么。</div>
+    </div>
+    <span class="number">02</span>
+  </section>
+
+  <section class="slide">
+    <p class="eyebrow">03 / 收束</p>
+    <div class="accent-line"></div>
+    <h2>让观众带走一句可复述的话</h2>
+    <p class="lead">把这页替换成你的结论、行动邀请，或下一次讨论需要确认的选择。</p>
+    <span class="number">03</span>
+  </section>
+
+  <script>
+    const slides = [...document.querySelectorAll('.slide')];
+    let index = 0;
+    function show(nextIndex) {
+      index = Math.max(0, Math.min(slides.length - 1, nextIndex));
+      slides.forEach((slide, position) => slide.classList.toggle('active', position === index));
+    }
+    addEventListener('keydown', (event) => {
+      if (['ArrowRight', 'PageDown', ' '].includes(event.key)) show(index + 1);
+      if (['ArrowLeft', 'PageUp'].includes(event.key)) show(index - 1);
+    });
+  </script>
+</body>
+</html>
